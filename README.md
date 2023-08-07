@@ -19,7 +19,8 @@ Read or watch
 
 ## Project Execution Workflow
 How your shell should work
-``$ ./console.py
+```
+$ ./console.py
 (hbnb) help
 
 Documented commands (type help <topic>):
@@ -29,11 +30,12 @@ EOF  help  quit
 (hbnb) 
 (hbnb) 
 (hbnb) quit
-$``
+$
+```
 
 But in non-interactive mode: (like the Shell project in C)
 
-``
+```
 $ echo "help" | ./console.py
 (hbnb)
 
@@ -53,7 +55,7 @@ Documented commands (type help <topic>):
 EOF  help  quit
 (hbnb) 
 $
-``
+```
 
 All test should also pass in non-interactive mode: ``$ echo "python3 -m unittest discover tests" | bash``
 
