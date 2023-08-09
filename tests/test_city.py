@@ -155,9 +155,9 @@ class TestCity_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_added_attributes(self):
         ci_ty = City()
-        ci_ty.middle_name = "Holberton"
+        ci_ty.middle_name = "ALX"
         ci_ty.my_number = 98
-        self.assertEqual("Holberton", ci_ty.middle_name)
+        self.assertEqual("ALX", ci_ty.middle_name)
         self.assertIn("my_number", ci_ty.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
