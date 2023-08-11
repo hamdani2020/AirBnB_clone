@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/python3
 """Defines the HBnB console."""
 import cmd
@@ -207,5 +206,3 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
-=======
->>>>>>> af603a58a8edfd5d1a05843e2c6ca42cb85c1a5d
