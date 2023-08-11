@@ -3,7 +3,7 @@
 
 from models.base_model import BaseModel
 
-class City(Basemodel):
+class City(BaseModel):
     """Instantiation city class"""
     state_id = ""
     name = ""

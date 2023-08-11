@@ -12,7 +12,10 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 71b3191da3a8da3c6353147fda3bf69a457358bc
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
@@ -32,8 +35,12 @@ def parse(arg):
 
 
 class HBNBCommand(cmd.Cmd):
+<<<<<<< HEAD
     """Defines the HBnB command interpreter.
 
+=======
+    """Defines the ALXBnB command interpreter.
+>>>>>>> 71b3191da3a8da3c6353147fda3bf69a457358bc
     Attributes:
         prompt (str): The command prompt.
     """
