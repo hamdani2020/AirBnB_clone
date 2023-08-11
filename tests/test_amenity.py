@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Defines unittests for models/amenity.py.
+
 Unittest classes:
     TestAmenity_instantiation
     TestAmenity_save
@@ -32,52 +33,52 @@ class TestAmenity_instantiation(unittest.TestCase):
         self.assertEqual(datetime, type(Amenity().updated_at))
 
     def test_name_is_public_class_attribute(self):
-        amen_ity = Amenity()
+        am = Amenity()
         self.assertEqual(str, type(Amenity.name))
         self.assertIn("name", dir(Amenity()))
-        self.assertNotIn("name", amen_ity.__dict__)
+        self.assertNotIn("name", am.__dict__)
 
     def test_two_amenities_unique_ids(self):
-        amen_ity1 = Amenity()
-        amen_ity2 = Amenity()
-        self.assertNotEqual(amen_ity1.id, amen_ity2.id)
+        am1 = Amenity()
+        am2 = Amenity()
+        self.assertNotEqual(am1.id, am2.id)
 
     def test_two_amenities_different_created_at(self):
-        amen_ity1 = Amenity()
+        am1 = Amenity()
         sleep(0.05)
-        amen_ity2 = Amenity()
-        self.assertLess(amen_ity1.created_at, amen_ity2.created_at)
+        am2 = Amenity()
+        self.assertLess(am1.created_at, am2.created_at)
 
     def test_two_amenities_different_updated_at(self):
-        amen_ity1 = Amenity()
+        am1 = Amenity()
         sleep(0.05)
-        amen_ity2 = Amenity()
-        self.assertLess(amen_ity1.updated_at, amen_ity2.updated_at)
+        am2 = Amenity()
+        self.assertLess(am1.updated_at, am2.updated_at)
 
     def test_str_representation(self):
-        date_time = datetime.today()
-        dt_repr = repr(date_time)
-        amen_ity = Amenity()
-        amen_ity.id = "123456"
-        amen_ity.created_at = amen_ity.updated_at = date_time
-        amstr = amen_ity.__str__()
+        dt = datetime.today()
+        dt_repr = repr(dt)
+        am = Amenity()
+        am.id = "123456"
+        am.created_at = am.updated_at = dt
+        amstr = am.__str__()
         self.assertIn("[Amenity] (123456)", amstr)
         self.assertIn("'id': '123456'", amstr)
         self.assertIn("'created_at': " + dt_repr, amstr)
         self.assertIn("'updated_at': " + dt_repr, amstr)
 
     def test_args_unused(self):
-        amen_ity = Amenity(None)
-        self.assertNotIn(None, amen_ity.__dict__.values())
+        am = Amenity(None)
+        self.assertNotIn(None, am.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
         """instantiation with kwargs test method"""
-        date_time = datetime.today()
-        dt_iso = date_time.isoformat()
-        amen_ity = Amenity(id="345", created_at=dt_iso, updated_at=dt_iso)
-        self.assertEqual(amen_ity.id, "345")
-        self.assertEqual(amen_ity.created_at, date_time)
-        self.assertEqual(amen_ity.updated_at, date_time)
+        dt = datetime.today()
+        dt_iso = dt.isoformat()
+        am = Amenity(id="345", created_at=dt_iso, updated_at=dt_iso)
+        self.assertEqual(am.id, "345")
+        self.assertEqual(am.created_at, dt)
+        self.assertEqual(am.updated_at, dt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -105,32 +106,32 @@ class TestAmenity_save(unittest.TestCase):
             pass
 
     def test_one_save(self):
-        amen_ity = Amenity()
+        am = Amenity()
         sleep(0.05)
-        first_updated_at = amen_ity.updated_at
-        amen_ity.save()
-        self.assertLess(first_updated_at, amen_ity.updated_at)
+        first_updated_at = am.updated_at
+        am.save()
+        self.assertLess(first_updated_at, am.updated_at)
 
     def test_two_saves(self):
-        amen_ity = Amenity()
+        am = Amenity()
         sleep(0.05)
-        first_updated_at = amen_ity.updated_at
-        amen_ity.save()
-        second_updated_at = amen_ity.updated_at
+        first_updated_at = am.updated_at
+        am.save()
+        second_updated_at = am.updated_at
         self.assertLess(first_updated_at, second_updated_at)
         sleep(0.05)
-        amen_ity.save()
-        self.assertLess(second_updated_at, amen_ity.updated_at)
+        am.save()
+        self.assertLess(second_updated_at, am.updated_at)
 
     def test_save_with_arg(self):
-        amen_ity = Amenity()
+        am = Amenity()
         with self.assertRaises(TypeError):
-            amen_ity.save(None)
+            am.save(None)
 
     def test_save_updates_file(self):
-        amen_ity = Amenity()
-        amen_ity.save()
-        amid = "Amenity." + amen_ity.id
+        am = Amenity()
+        am.save()
+        amid = "Amenity." + am.id
         with open("file.json", "r") as f:
             self.assertIn(amid, f.read())
 
@@ -142,47 +143,47 @@ class TestAmenity_to_dict(unittest.TestCase):
         self.assertTrue(dict, type(Amenity().to_dict()))
 
     def test_to_dict_contains_correct_keys(self):
-        amen_ity = Amenity()
-        self.assertIn("id", amen_ity.to_dict())
-        self.assertIn("created_at", amen_ity.to_dict())
-        self.assertIn("updated_at", amen_ity.to_dict())
-        self.assertIn("__class__", amen_ity.to_dict())
+        am = Amenity()
+        self.assertIn("id", am.to_dict())
+        self.assertIn("created_at", am.to_dict())
+        self.assertIn("updated_at", am.to_dict())
+        self.assertIn("__class__", am.to_dict())
 
     def test_to_dict_contains_added_attributes(self):
-        amen_ity = Amenity()
-        amen_ity.middle_name = "ALX"
-        amen_ity.my_number = 98
-        self.assertEqual("ALX", amen_ity.middle_name)
-        self.assertIn("my_number", amen_ity.to_dict())
+        am = Amenity()
+        am.middle_name = "Alx"
+        am.my_number = 98
+        self.assertEqual("Alx", am.middle_name)
+        self.assertIn("my_number", am.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
-        amen_ity = Amenity()
-        am_dict = amen_ity.to_dict()
+        am = Amenity()
+        am_dict = am.to_dict()
         self.assertEqual(str, type(am_dict["id"]))
         self.assertEqual(str, type(am_dict["created_at"]))
         self.assertEqual(str, type(am_dict["updated_at"]))
 
     def test_to_dict_output(self):
-        date_time = datetime.today()
-        amen_ity = Amenity()
-        amen_ity.id = "123456"
-        amen_ity.created_at = amen_ity.updated_at = date_time
+        dt = datetime.today()
+        am = Amenity()
+        am.id = "123456"
+        am.created_at = am.updated_at = dt
         tdict = {
             'id': '123456',
             '__class__': 'Amenity',
-            'created_at': date_time.isoformat(),
-            'updated_at': date_time.isoformat(),
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
         }
-        self.assertDictEqual(amen_ity.to_dict(), tdict)
+        self.assertDictEqual(am.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
-        amen_ity = Amenity()
-        self.assertNotEqual(amen_ity.to_dict(), amen_ity.__dict__)
+        am = Amenity()
+        self.assertNotEqual(am.to_dict(), am.__dict__)
 
     def test_to_dict_with_arg(self):
-        amen_ity = Amenity()
+        am = Amenity()
         with self.assertRaises(TypeError):
-            amen_ity.to_dict(None)
+            am.to_dict(None)
 
 
 if __name__ == "__main__":
