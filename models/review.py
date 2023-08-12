@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class Review(BaseModel):
     """Instantiation of review class"""
     place_id = ""
